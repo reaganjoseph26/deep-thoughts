@@ -34,7 +34,8 @@ const typeDefs = gql`
         user: User
     }
 
-    type Query {
+    type Query {\
+        me: User
         users: [User]
         user(username: String!): User
         thoughts(username: String): [Thought]
@@ -44,10 +45,13 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
+        addThought(thoughtText: String!): Thought
+        addReaction(thoughtId: ID!, reactionBody: String!): Thought
+        addFriend(friendId: ID!): User
     }
     
 `;
-//login and addUser are mutations that will return a user object either successfully logged in or newly created user 
+// addReaction() will return the parent Thought instead of the newly created Reaction because the front end will ultimately track changes on the thought level, not the reaction level.
 //  thoughts(username: String): [Thought] allows thoughts query to be recieved with or w/o username parameter
 // ! indicates that for that query to be carried out, the data must exist
 
