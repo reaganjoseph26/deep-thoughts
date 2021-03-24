@@ -35,8 +35,14 @@ const typeDefs = gql`
         thoughts(username: String): [Thought]
         thought(_id: ID!): Thought
     }
-`;
 
+    type Mutation {
+        login(email: String!, password: String!): User
+        addUser(username: String!, email: String!, password: String!): User
+    }
+    
+`;
+//login and addUser are mutations that will return a user object either successfully logged in or newly created user 
 //  thoughts(username: String): [Thought] allows thoughts query to be recieved with or w/o username parameter
 // ! indicates that for that query to be carried out, the data must exist
 
